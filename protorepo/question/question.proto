@@ -1,0 +1,52 @@
+syntax = "proto3";
+
+import public "google/protobuf/timestamp.proto";
+import public "github.com/infobloxopen/protoc-gen-gorm/options/gorm.proto";
+
+package question;
+option go_package = "question";
+
+message Question {
+  option (gorm.opts) = {
+    ormable: true,
+    table: "question",
+  };
+
+  int64 id                              = 1  [(gorm.field).tag = { auto_increment:true, primary_key:true }]; // primary key
+  google.protobuf.Timestamp createdAt   = 2  [(gorm.field).tag = { not_null:true }];
+  google.protobuf.Timestamp updatedAt   = 3  [(gorm.field).tag = { not_null:true }]; 
+  string title                          = 4  [(gorm.field).tag = { not_null:true }];  // 标题
+  string summary                        = 5  [(gorm.field).tag = { not_null:true }];  // 概述
+  string content                        = 6  [(gorm.field).tag = { not_null:true, default: "''" }]; // 内容
+  int32 difficulty                      = 7  [(gorm.field).tag = { not_null:true, default:"0" }];   // 难度
+}
+
+message GetQuestionListRequest {
+  int32 page                          = 1;
+  int32 size                          = 2;
+  string keyword                      = 3; // 关键字
+}
+
+message QuestionList {
+  int64 total                         = 1;
+  repeated Question questions         = 2;
+}
+
+message CreateQuestionResponse {
+  int64 id                            = 1;
+}
+
+message UpdateQuestionResponse {
+  bool success                        = 1;
+}
+
+service QuestionServive {
+  // 创建
+  rpc CreateQuestion(Question) returns (CreateQuestionResponse) {}
+  // 更新
+  rpc UpdateQuestion(Question) returns (UpdateQuestionResponse) {}
+  // 查看详情
+  rpc GetQuestionDetail(Question) returns (Question) {}
+  // 查看列表
+  rpc GetQuestionList(GetQuestionListRequest) returns (QuestionList) {}
+}
