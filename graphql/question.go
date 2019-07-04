@@ -2,7 +2,6 @@ package main
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/golang/glog"
 	"github.com/graphql-go/graphql"
@@ -113,8 +112,6 @@ var queryQuestionListField = graphql.Field{
 		if err != nil {
 			glog.Error((err))
 		}
-
-		fmt.Println("%+v\n", qss)
 
 		res := QuestionListPageAble{
 			TotalCount: qss.Total,

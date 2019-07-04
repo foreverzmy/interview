@@ -26,15 +26,20 @@ func GPHandle(w http.ResponseWriter, r *http.Request) {
 	// } else {
 	// 	// ctx = context.WithValue(ctx, auth.TokenUserIDKey, claims.UserID)
 	// }
-	w.Header().Set("Content-Type", "application/json")
-	h.ContextHandler(ctx, w, r)
+	w.Header().Set("Access-Control-Allow-Origin", "*")             //允许访问所有域
+	w.Header().Add("Access-Control-Allow-Headers", "Content-Type") //header的类型
+	w.Header().Set("content-type", "application/json")             //返回数据格式是json
+	w.Header().Add("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
 
+	h.ContextHandler(ctx, w, r)
 }
 
 func init() {
 	// register("POST", "/auth/register", auth.Register, nil)
 	// register("POST", "/auth/login", auth.Login, nil)
 	register("POST", "/graphql", GPHandle, nil)
+
+	register("OPTIONS", "/graphql", GPHandle, nil)
 	// register("POST", "/gp", controller.GPHandle, auth.TokenMiddleware)
 }
 
