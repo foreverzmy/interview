@@ -5,7 +5,7 @@ import (
 )
 
 // GetTopicList topic 列表
-func GetTopicList() (topics []question.TopicORM, total int64, err error) {
+func GetTopicList() (topics []*question.Topic, total int64, err error) {
 	err = DB.Table("topic").Count(&total).Error
 
 	if err != nil {

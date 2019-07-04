@@ -123,7 +123,7 @@ var queryQuestionListField = graphql.Field{
 }
 
 var mutationCreateQuestion = graphql.Field{
-	Description: "Creates a new question",
+	Description: "Create a new question",
 	Type:        questionFieldType,
 	Args: graphql.FieldConfigArgument{
 		"title": &graphql.ArgumentConfig{

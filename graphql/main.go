@@ -12,6 +12,7 @@ import (
 	"google.golang.org/grpc"
 
 	"github.com/piex/interview/protorepo/question"
+	"github.com/piex/interview/protorepo/topic"
 	"github.com/piex/interview/scenter"
 )
 
@@ -20,7 +21,8 @@ var (
 	Schema graphql.Schema
 	h      *handler.Handler
 
-	qsClient question.QuestionServiveClient
+	qsClient    question.QuestionServiveClient
+	topicClient topic.TopicServiceClient
 
 	serv = flag.String("service", "question_service", "service name")
 	reg  = flag.String("reg", "http://127.0.0.1:2379", "register etcd address")
@@ -59,6 +61,7 @@ func initGrpc() {
 	}
 
 	qsClient = question.NewQuestionServiveClient(conn)
+	topicClient = topic.NewTopicServiceClient(conn)
 }
 
 func init() {

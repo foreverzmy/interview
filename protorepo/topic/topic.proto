@@ -22,6 +22,19 @@ message Topic {
   string slug                           = 4  [(gorm.field).tag = { not_null:true }]; // 内容
 }
 
+message QuTopic {
+  option (gorm.opts) = {
+    ormable: true,
+    table: "qu_topic",
+  };
+
+  int64 id                              = 1  [(gorm.field).tag = { auto_increment:true, primary_key:true }]; // primary key
+  google.protobuf.Timestamp createdAt   = 2  [(gorm.field).tag = { not_null:true }];
+  google.protobuf.Timestamp updatedAt   = 3  [(gorm.field).tag = { not_null:true }]; 
+  int64 quId                            = 4  [(gorm.field).tag = { not_null:true }];
+  int64 topicId                         = 5  [(gorm.field).tag = { not_null:true }];
+}
+
 message TopicList {
   int64 total                         = 1;
   repeated Topic topics               = 2;
@@ -43,6 +56,11 @@ message GetQusByTopicResponse {
   repeated int64 qus                  = 1;
 }
 
+message AddTopicsToQuestionRequest {
+  int64 qu_id                         = 1;
+  repeated int64 topic_id             = 2;
+}
+
 service TopicService {
   // 创建
   rpc CreateTopic(Topic) returns (CreateTopicResponse) {}
@@ -55,4 +73,7 @@ service TopicService {
 
   // 查找有指定 topic 的 qus
   rpc GetQusByTopic(GetQusByTopicRequest) returns (interview.question.QuestionList) {}
+
+  // qu 添加 topic
+  rpc AddTopicsToQuestion(AddTopicsToQuestionRequest) returns (Empty) {}
 }

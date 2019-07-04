@@ -10,6 +10,7 @@ import (
 	"time"
 
 	"github.com/piex/interview/protorepo/question"
+	"github.com/piex/interview/protorepo/topic"
 	"github.com/piex/interview/scenter"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/keepalive"
@@ -69,6 +70,7 @@ func main() {
 		}))
 
 	question.RegisterQuestionServiveServer(grpcServer, &QuestionService{})
+	topic.RegisterTopicServiceServer(grpcServer, &TopicService{})
 
 	// start the server
 	if err := grpcServer.Serve(lis); err != nil {

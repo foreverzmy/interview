@@ -9,6 +9,9 @@ usage:
 	@echo $(usage)
 
 
+proto:
+	cd protorepo && ./build.sh
+
 qs:
 	cd question && go build -tags 'netcgo' && ./question -alsologtostderr=true
 
