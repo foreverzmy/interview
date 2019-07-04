@@ -5,7 +5,7 @@ import (
 
 	"github.com/golang/glog"
 	"github.com/graphql-go/graphql"
-	"github.com/piex/interview/protorepo/golang/question"
+	"github.com/piex/interview/protorepo/question"
 )
 
 // QuestionListPageAble qs list 分页

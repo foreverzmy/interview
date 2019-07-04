@@ -9,7 +9,7 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/piex/interview/protorepo/golang/question"
+	"github.com/piex/interview/protorepo/question"
 	"github.com/piex/interview/scenter"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/keepalive"

@@ -5,7 +5,6 @@ CURRENT_BRANCH=${CIRCLE_BRANCH-"branch-not-available"}
 
 rm -rf ./golang
 rm -rf ./python
-mkdir golang
 
 # Helper for adding a directory to the stack and echoing the result
 function enterDir {
@@ -39,13 +38,13 @@ function buildLange {
 
   case $targetLang in
     go)
-      mkdir ../golang/$currentDir
+      # mkdir ../golang/$currentDir
       protoc -I /usr/local/include \
         -I ${GOPATH}/src \
         -I ./ \
-        -I ../golang/$currentDir \
-        --go_out=plugins=grpc:../golang/$currentDir \
-        --gorm_out=plugins=grpc,engine=mysql:../golang/$currentDir \
+        -I ../$currentDir \
+        --go_out=plugins=grpc:../$currentDir \
+        --gorm_out=plugins=grpc,engine=mysql:../$currentDir \
         --proto_path=. \
         *.proto 
       ;;

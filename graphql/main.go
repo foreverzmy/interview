@@ -11,7 +11,7 @@ import (
 	"github.com/graphql-go/handler"
 	"google.golang.org/grpc"
 
-	"github.com/piex/interview/protorepo/golang/question"
+	"github.com/piex/interview/protorepo/question"
 	"github.com/piex/interview/scenter"
 )
 

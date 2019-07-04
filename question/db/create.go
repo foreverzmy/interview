@@ -4,7 +4,7 @@ import (
 	"fmt"
 
 	"github.com/golang/glog"
-	"github.com/piex/interview/protorepo/golang/question"
+	"github.com/piex/interview/protorepo/question"
 )
 
 // CreateQuestion 创建问题

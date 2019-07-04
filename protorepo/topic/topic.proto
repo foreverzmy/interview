@@ -1,0 +1,58 @@
+syntax = "proto3";
+
+import public "google/protobuf/timestamp.proto";
+import public "github.com/infobloxopen/protoc-gen-gorm/options/gorm.proto";
+
+import public "github.com/piex/interview/protorepo/question/question.proto";
+
+package interview.topic;
+option go_package = "topic";
+
+message Empty {}
+
+message Topic {
+  option (gorm.opts) = {
+    ormable: true,
+    table: "topic",
+  };
+
+  int64 id                              = 1  [(gorm.field).tag = { auto_increment:true, primary_key:true }]; // primary key
+  google.protobuf.Timestamp createdAt   = 2  [(gorm.field).tag = { not_null:true }];
+  google.protobuf.Timestamp updatedAt   = 3  [(gorm.field).tag = { not_null:true }]; 
+  string slug                           = 4  [(gorm.field).tag = { not_null:true }]; // 内容
+}
+
+message TopicList {
+  int64 total                         = 1;
+  repeated Topic topics               = 2;
+}
+
+message CreateTopicResponse {
+  int64 id                            = 1;
+}
+
+message GetTopicRequest {
+  int64 qu_id                         = 1;
+}
+
+message GetQusByTopicRequest {
+  int64 topic_id                      = 1;
+}
+
+message GetQusByTopicResponse {
+  repeated int64 qus                  = 1;
+}
+
+service TopicService {
+  // 创建
+  rpc CreateTopic(Topic) returns (CreateTopicResponse) {}
+ 
+  // 查找全部 topic
+  rpc GetTopicList(Empty) returns (TopicList) {}
+
+  // 查询 qu 的 topic
+  rpc GetTopic(GetTopicRequest) returns (TopicList) {}
+
+  // 查找有指定 topic 的 qus
+  rpc GetQusByTopic(GetQusByTopicRequest) returns (interview.question.QuestionList) {}
+}

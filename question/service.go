@@ -4,7 +4,7 @@ import (
 	"context"
 
 	"github.com/golang/glog"
-	"github.com/piex/interview/protorepo/golang/question"
+	"github.com/piex/interview/protorepo/question"
 	"github.com/piex/interview/question/db"
 )
 

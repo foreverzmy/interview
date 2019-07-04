@@ -1,7 +1,7 @@
 package db
 
 import (
-	"github.com/piex/interview/protorepo/golang/question"
+	"github.com/piex/interview/protorepo/question"
 )
 
 // UpdateQuestion 更新问题

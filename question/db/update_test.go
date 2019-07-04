@@ -3,7 +3,7 @@ package db
 import (
 	"testing"
 
-	"github.com/piex/interview/protorepo/golang/question"
+	"github.com/piex/interview/protorepo/question"
 )
 
 func TestUpdateQuestion(t *testing.T) {

@@ -1,7 +1,7 @@
 package db
 
 import (
-	"github.com/piex/interview/protorepo/golang/question"
+	"github.com/piex/interview/protorepo/question"
 )
 
 // GetQuestionList 问题列表

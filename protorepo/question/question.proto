@@ -3,7 +3,7 @@ syntax = "proto3";
 import public "google/protobuf/timestamp.proto";
 import public "github.com/infobloxopen/protoc-gen-gorm/options/gorm.proto";
 
-package question;
+package interview.question;
 option go_package = "question";
 
 message Question {
