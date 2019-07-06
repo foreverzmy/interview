@@ -44,14 +44,18 @@ func (s *TopicService) GetTopicList(ctx context.Context, req *topic.Empty) (*top
 }
 
 // GetTopic 查询 topic 详情
-func (s *TopicService) GetTopic(ctx context.Context, req topic.GetTopicRequest) (topic *topic.Topic, err error) {
+func (s *TopicService) GetTopic(ctx context.Context, req *topic.GetTopicRequest) (*topic.Topic, error) {
+	tocORM, err := db.GetTopic(req.Id)
 
+	toc, err := tocORM.ToPB(ctx)
+
+	return &toc, err
 }
 
 // GetTopicsByQu 查询 qu 的 topic
 func (s *TopicService) GetTopicsByQu(ctx context.Context, req *topic.GetTopicsByQuRequest) (*topic.TopicList, error) {
 
-	topics, err := db.GetTopic(req.QuId)
+	topics, err := db.GetTopicByQu(req.QuId)
 
 	return &topics, err
 }

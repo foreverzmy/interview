@@ -46,15 +46,19 @@ var topicListFieldType = graphql.NewObject(graphql.ObjectConfig{
 
 var queryTopicField = graphql.Field{
 	Description: "topic",
-	Type:        topicListFieldType,
+	Type:        topicFieldType,
 	Args: graphql.FieldConfigArgument{
 		"id": &graphql.ArgumentConfig{
 			Description: "The id topic",
-			Type:        graphql.Int,
+			Type:        graphql.NewNonNull(graphql.Int),
 		},
 	},
 	Resolve: func(p graphql.ResolveParams) (interface{}, error) {
+		id := int64(p.Args["id"].(int))
 
+		toc, err := topicClient.GetTopic(context.Background(), &topic.GetTopicRequest{Id: id})
+
+		return toc, err
 	},
 }
 
@@ -82,7 +86,7 @@ var queryTopicListField = graphql.Field{
 			}
 		}
 
-		req := topic.GetTopicRequest{
+		req := topic.GetTopicsByQuRequest{
 			QuId: quID,
 		}
 
@@ -90,7 +94,7 @@ var queryTopicListField = graphql.Field{
 		var err error
 
 		if quID > 0 {
-			topics, err = topicClient.GetTopic(context.Background(), &req)
+			topics, err = topicClient.GetTopicsByQu(context.Background(), &req)
 		} else {
 			topics, err = topicClient.GetTopicList(context.Background(), &topic.Empty{})
 		}
