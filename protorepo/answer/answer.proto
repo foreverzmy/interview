@@ -1,0 +1,48 @@
+syntax = "proto3";
+
+import public "google/protobuf/timestamp.proto";
+import public "github.com/infobloxopen/protoc-gen-gorm/options/gorm.proto";
+
+package interview.answer;
+option go_package = "answer";
+
+message Empty {}
+
+message Answer {
+  option (gorm.opts) = {
+    ormable: true,
+    table: "answer",
+  };
+
+  int64 id                              = 1  [(gorm.field).tag = { auto_increment:true, primary_key:true }]; // primary key
+  google.protobuf.Timestamp createdAt   = 2  [(gorm.field).tag = { not_null:true }];
+  google.protobuf.Timestamp updatedAt   = 3  [(gorm.field).tag = { not_null:true }];
+  int64 quId                            = 4  [(gorm.field).tag = { not_null:true }];
+  string content                        = 5  [(gorm.field).tag = { not_null:true, default: "''" }]; // 内容
+}
+
+message AnswerList {
+  int64 total                         = 1;
+  repeated Answer answers             = 2;
+}
+
+message CreateAnswerResponse {
+  int64 id                            = 1;
+}
+
+message GetAnswerListRequest {
+  int32 page                          = 1;
+  int32 size                          = 2;
+  int64 quId                          = 3;
+}
+
+service AnswerService {
+  // 创建
+  rpc CreateAnswer(Answer) returns (CreateAnswerResponse) {}
+
+  // 编辑
+  rpc UpdateAnswer(Answer) returns (Empty) {}
+
+  // 获取列表
+  rpc GetAnswerList(GetAnswerListRequest) returns (AnswerList) {}
+}

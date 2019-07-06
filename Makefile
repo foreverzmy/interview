@@ -15,5 +15,9 @@ proto:
 qs:
 	cd question && go build -tags 'netcgo' && ./question -alsologtostderr=true
 
+
+ans:
+	cd answer && go build -tags 'netcgo' && ./answer -alsologtostderr=true
+
 graphql:
 	cd graphql && go build -tags 'netcgo' && ./graphql -alsologtostderr=true

@@ -27,6 +27,22 @@ var topicFieldType = graphql.NewObject(graphql.ObjectConfig{
 			Description: "feed title",
 			Type:        graphql.String,
 		},
+		"createdAt": &graphql.Field{
+			Description: "create at",
+			Type:        graphql.Float,
+			Resolve: func(p graphql.ResolveParams) (interface{}, error) {
+				toc := p.Source.(*topic.Topic)
+				return toc.CreatedAt.Seconds * 1000, nil
+			},
+		},
+		"updatedAt": &graphql.Field{
+			Description: "create at",
+			Type:        graphql.Float,
+			Resolve: func(p graphql.ResolveParams) (interface{}, error) {
+				toc := p.Source.(*topic.Topic)
+				return toc.UpdatedAt.Seconds * 1000, nil
+			},
+		},
 	},
 })
 

@@ -11,6 +11,7 @@ import (
 	"github.com/graphql-go/handler"
 	"google.golang.org/grpc"
 
+	"github.com/piex/interview/protorepo/answer"
 	"github.com/piex/interview/protorepo/question"
 	"github.com/piex/interview/protorepo/topic"
 	"github.com/piex/interview/scenter"
@@ -23,9 +24,9 @@ var (
 
 	qsClient    question.QuestionServiveClient
 	topicClient topic.TopicServiceClient
+	ansClient   answer.AnswerServiceClient
 
-	serv = flag.String("service", "question_service", "service name")
-	reg  = flag.String("reg", "http://127.0.0.1:2379", "register etcd address")
+	reg = flag.String("reg", "http://127.0.0.1:2379", "register etcd address")
 )
 
 func initGraphql() {
@@ -49,7 +50,7 @@ func initGraphql() {
 	})
 }
 
-func initGrpc() {
+func getConn(serv *string) *grpc.ClientConn {
 	r := scenter.NewResolver(*serv)
 	b := grpc.RoundRobin(r)
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
@@ -60,13 +61,22 @@ func initGrpc() {
 		panic(err)
 	}
 
-	qsClient = question.NewQuestionServiveClient(conn)
-	topicClient = topic.NewTopicServiceClient(conn)
+	return conn
+
 }
 
 func init() {
+	quServ := flag.String("question_service", "question_service", "service name")
+	ansServ := flag.String("answer_service", "answer_service", "service name")
+
 	initGraphql()
-	initGrpc()
+	quConn := getConn(quServ)
+	ansConn := getConn(ansServ)
+
+	qsClient = question.NewQuestionServiveClient(quConn)
+	topicClient = topic.NewTopicServiceClient(quConn)
+
+	ansClient = answer.NewAnswerServiceClient(ansConn)
 }
 
 func main() {

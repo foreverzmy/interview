@@ -3,10 +3,10 @@ CREATE DATABASE interview_ans;
 USE interview_ans;
 
 -- 删除表
-DROP TABLE IF EXISTS ans;
+DROP TABLE IF EXISTS answer;
 
 -- answer 表
-CREATE TABLE IF NOT EXISTS ans (
+CREATE TABLE IF NOT EXISTS answer (
   `id`              INT UNSIGNED AUTO_INCREMENT,                   -- primary key
   `qu_id`           INT(64) NOT NULL,                              -- question.id
   `content`         LONGTEXT DEFAULT NULL,   -- 内容

@@ -7,5 +7,7 @@ var mutationType = graphql.NewObject(graphql.ObjectConfig{
 	Fields: graphql.Fields{
 		"createQuestion": &mutationCreateQuestion,
 		"createTopic":    &mutaionCreateTopic,
+		"createAnswer":   &mutationCreateAnswer,
+		"updateAnswer":   &mutationUpdateAnswer,
 	},
 })

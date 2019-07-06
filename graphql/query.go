@@ -11,5 +11,6 @@ var queryType = graphql.NewObject(graphql.ObjectConfig{
 		"questions": &queryQuestionListField,
 		"topics":    &queryTopicListField,
 		"topic":     &queryTopicField,
+		"answers":   &queryAnswerListField,
 	},
 })

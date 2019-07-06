@@ -39,6 +39,22 @@ var questionFieldType = graphql.NewObject(graphql.ObjectConfig{
 			Description: "difficulty",
 			Type:        graphql.Int,
 		},
+		"createdAt": &graphql.Field{
+			Description: "create at",
+			Type:        graphql.Float,
+			Resolve: func(p graphql.ResolveParams) (interface{}, error) {
+				qu := p.Source.(*question.Question)
+				return qu.CreatedAt.Seconds * 1000, nil
+			},
+		},
+		"updatedAt": &graphql.Field{
+			Description: "create at",
+			Type:        graphql.Float,
+			Resolve: func(p graphql.ResolveParams) (interface{}, error) {
+				qu := p.Source.(*question.Question)
+				return qu.UpdatedAt.Seconds * 1000, nil
+			},
+		},
 		"topics": &queryTopicListField,
 	},
 })
