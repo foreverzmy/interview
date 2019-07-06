@@ -1,0 +1,19 @@
+.main-search {
+  display: flex;
+  box-sizing: border-box;
+  margin: 0 auto;
+  padding: 5px 8px 5px 16px;
+  width: 582px;
+  height: 44px;
+  border: 1px solid #dfe1e5;
+  border-radius: 24px;
+  
+  &__input {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    outline: none;
+    border: none;
+    font: 16px arial,sans-serif;
+  }
+}
