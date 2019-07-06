@@ -28,20 +28,40 @@ func (s *TopicService) GetTopicList(ctx context.Context, req *topic.Empty) (*top
 
 	res := topic.TopicList{
 		Total:  total,
-		Topics: topics,
+		Topics: nil,
+	}
+
+	for _, topicORM := range topics {
+		topic, err := topicORM.ToPB(ctx)
+		if err != nil {
+			return nil, err
+		}
+
+		res.Topics = append(res.Topics, &topic)
 	}
 
 	return &res, err
 }
 
-// GetTopic 查询 qu 的 topi
-func (s *TopicService) GetTopic(ctx context.Context, req *topic.GetTopicRequest) (*topic.TopicList, error) {
-	return nil, nil
+// GetTopic 查询 topic 详情
+func (s *TopicService) GetTopic(ctx context.Context, req topic.GetTopicRequest) (topic *topic.Topic, err error) {
+
+}
+
+// GetTopicsByQu 查询 qu 的 topic
+func (s *TopicService) GetTopicsByQu(ctx context.Context, req *topic.GetTopicsByQuRequest) (*topic.TopicList, error) {
+
+	topics, err := db.GetTopic(req.QuId)
+
+	return &topics, err
 }
 
 // GetQusByTopic 查找有指定 topic 的 qus
 func (s *TopicService) GetQusByTopic(ctx context.Context, req *topic.GetQusByTopicRequest) (*topic.QuestionList, error) {
-	return nil, nil
+
+	qus, err := db.GetQusByTopic(req.Page, req.Size, req.TopicId)
+
+	return &qus, err
 }
 
 // AddTopicsToQuestion qu 添加 topic

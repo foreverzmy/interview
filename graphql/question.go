@@ -6,6 +6,7 @@ import (
 	"github.com/golang/glog"
 	"github.com/graphql-go/graphql"
 	"github.com/piex/interview/protorepo/question"
+	"github.com/piex/interview/protorepo/topic"
 )
 
 // QuestionListPageAble qs list 分页
@@ -23,21 +24,22 @@ var questionFieldType = graphql.NewObject(graphql.ObjectConfig{
 			Type:        graphql.Int,
 		},
 		"title": &graphql.Field{
-			Description: "feed title",
+			Description: "title",
 			Type:        graphql.String,
 		},
 		"summary": &graphql.Field{
-			Description: "feed title",
+			Description: "summary",
 			Type:        graphql.String,
 		},
 		"content": &graphql.Field{
-			Description: "feed title",
+			Description: "content",
 			Type:        graphql.String,
 		},
 		"difficulty": &graphql.Field{
-			Description: "feed ID",
+			Description: "difficulty",
 			Type:        graphql.Int,
 		},
+		"topics": &queryTopicListField,
 	},
 })
 
@@ -95,11 +97,48 @@ var queryQuestionListField = graphql.Field{
 			Type:         graphql.String,
 			DefaultValue: "",
 		},
+		"topicId": &graphql.ArgumentConfig{
+			Description: "topic id",
+			Type:        graphql.Int,
+		},
 	},
 	Resolve: func(p graphql.ResolveParams) (interface{}, error) {
 		page := int32(p.Args["page"].(int))
 		size := int32(p.Args["size"].(int))
 		keyword := p.Args["keyword"].(string)
+		topicIDInt, topicIDOK := p.Args["topicId"].(int)
+
+		t, tOK := p.Source.(*topic.Topic)
+
+		var topicID int64
+
+		topicID = int64(topicIDInt)
+
+		if tOK {
+			topicID = t.Id
+		}
+
+		if topicIDOK || tOK {
+
+			req := topic.GetQusByTopicRequest{
+				Page:    page,
+				Size:    size,
+				TopicId: topicID,
+			}
+
+			qus, err := topicClient.GetQusByTopic(context.Background(), &req)
+
+			if err != nil {
+				glog.Error((err))
+			}
+
+			res := QuestionListPageAble{
+				TotalCount: qus.Total,
+				Nodes:      qus.Questions,
+			}
+
+			return res, err
+		}
 
 		req := question.GetQuestionListRequest{
 			Page:    page,
@@ -107,15 +146,15 @@ var queryQuestionListField = graphql.Field{
 			Keyword: keyword,
 		}
 
-		qss, err := qsClient.GetQuestionList(context.Background(), &req)
+		qus, err := qsClient.GetQuestionList(context.Background(), &req)
 
 		if err != nil {
 			glog.Error((err))
 		}
 
 		res := QuestionListPageAble{
-			TotalCount: qss.Total,
-			Nodes:      qss.Questions,
+			TotalCount: qus.Total,
+			Nodes:      qus.Questions,
 		}
 
 		return res, err

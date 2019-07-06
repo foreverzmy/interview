@@ -9,5 +9,9 @@ func TestGetTopic(t *testing.T) {
 		t.Error(err)
 	}
 
+	if topics.Total == 0 {
+		t.Error("total is zero.")
+	}
+
 	t.Errorf("%+v\n", topics)
 }

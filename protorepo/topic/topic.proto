@@ -45,11 +45,17 @@ message CreateTopicResponse {
 }
 
 message GetTopicRequest {
+  int64 id                         = 1;
+}
+
+message GetTopicsByQuRequest {
   int64 qu_id                         = 1;
 }
 
 message GetQusByTopicRequest {
-  int64 topic_id                      = 1;
+  int32 page                          = 1;
+  int32 size                          = 2;
+  int64 topic_id                      = 3;
 }
 
 message GetQusByTopicResponse {
@@ -68,8 +74,9 @@ service TopicService {
   // 查找全部 topic
   rpc GetTopicList(Empty) returns (TopicList) {}
 
+  rpc GetTopic(GetTopicRequest) returns (Topic) {}
   // 查询 qu 的 topic
-  rpc GetTopic(GetTopicRequest) returns (TopicList) {}
+  rpc GetTopicsByQu(GetTopicsByQuRequest) returns (TopicList) {}
 
   // 查找有指定 topic 的 qus
   rpc GetQusByTopic(GetQusByTopicRequest) returns (interview.question.QuestionList) {}

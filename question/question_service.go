@@ -48,7 +48,7 @@ func (s *QuestionService) GetQuestionDetail(ctx context.Context, req *question.Q
 // GetQuestionList 查看列表
 func (s *QuestionService) GetQuestionList(ctx context.Context, req *question.GetQuestionListRequest) (*question.QuestionList, error) {
 
-	qssOrm, total, err := db.GetQuestionList(req.Page, req.Size, req.Keyword)
+	qusOrm, total, err := db.GetQuestionList(req.Page, req.Size, req.Keyword)
 
 	if err != nil {
 		glog.Error(err)
@@ -60,13 +60,13 @@ func (s *QuestionService) GetQuestionList(ctx context.Context, req *question.Get
 		Questions: nil,
 	}
 
-	for _, qsOrm := range qssOrm {
-		qs, err := qsOrm.ToPB(ctx)
+	for _, quOrm := range qusOrm {
+		qu, err := quOrm.ToPB(ctx)
 		if err != nil {
 			return nil, err
 		}
 
-		res.Questions = append(res.Questions, &qs)
+		res.Questions = append(res.Questions, &qu)
 	}
 
 	return res, err
