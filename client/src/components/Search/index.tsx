@@ -22,15 +22,15 @@ const Search: FC<ISearchProps> = ({ placeholder, value, onChange, onEnter }) => 
   }, [value])
 
   return (
-    <div className="main-search">
+    <section className="search">
       <input
-        className="main-search__input"
+        className="search__input"
         placeholder={placeholder}
         value={value}
         onChange={handleChange}
         onKeyDown={handleKeyDown}
       />
-    </div>
+    </section>
   )
 }
 

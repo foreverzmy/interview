@@ -1,0 +1,50 @@
+.questions {
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 4px 4px 0 0;
+  color: rgba(0,0,0,0.85);
+  list-style: none;
+  text-align: left;
+  font-variant: tabular-nums;
+  font-size: 14px;
+  line-height: 1.5;
+
+  font-feature-settings: 'tnum';
+
+  table {
+    width: 100%;
+    color: rgba(0,0,0,0.85);
+    list-style: none;
+    font-variant: tabular-nums;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  thead {
+    width: 100%;
+    
+    th{    
+      margin: 0;
+      padding: 16px 16px;
+      border-bottom: 1px solid #e8e8e8;
+      background: #fafafa;
+      color: rgba(0,0,0,0.85);
+      text-align: left;
+      font-weight: 500;
+      transition: background .3s ease;
+    }
+  }
+
+  tbody {
+    td {
+      padding: 16px 16px;
+      border-bottom: 1px solid #e8e8e8;
+      transition: all .3s,border 0s;
+
+      a {
+        text-decoration: none;
+      }
+    }
+    
+  }
+}

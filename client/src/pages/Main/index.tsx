@@ -13,18 +13,16 @@ const Main: FC<RouteComponentProps<any>> = ({ history }) => {
   }, [keyword])
 
   return (
-    <main>
+    <main className="main-page">
       <section className="banner">
         面试题
       </section>
-      <article>
-        <Search
-          placeholder="回车搜索"
-          value={keyword}
-          onChange={setKeyword}
-          onEnter={handleSearch}
-        />
-      </article>
+      <Search
+        placeholder="回车搜索"
+        value={keyword}
+        onChange={setKeyword}
+        onEnter={handleSearch}
+      />
       <Topics />
     </main>
   )

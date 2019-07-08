@@ -30,6 +30,10 @@ message CreateAnswerResponse {
   int64 id                            = 1;
 }
 
+message GetAnswerRequest {
+  int64 id                            = 1;
+}
+
 message GetAnswerListRequest {
   int32 page                          = 1;
   int32 size                          = 2;
@@ -42,6 +46,9 @@ service AnswerService {
 
   // 编辑
   rpc UpdateAnswer(Answer) returns (Empty) {}
+
+  // 查询 answer 详情
+  rpc GetAnswer(GetAnswerRequest) returns (Answer) {}
 
   // 获取列表
   rpc GetAnswerList(GetAnswerListRequest) returns (AnswerList) {}

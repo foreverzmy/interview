@@ -1,0 +1,17 @@
+.editor {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  border: 1px solid #ddd;
+
+  .CodeMirror {
+    width: 50%;
+    height: auto;
+  }
+
+  .markdown-wrapper {
+    box-sizing: border-box;
+    padding: 10px;
+    width: 50%;
+  }
+}

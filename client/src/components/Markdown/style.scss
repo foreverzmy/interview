@@ -1,0 +1,172 @@
+.markdown-wrapper {
+  word-break: break-all;
+  letter-spacing: 0.1em;
+  font-size: 16px;
+  line-height: 1.8em;
+
+  pre, code {
+    margin: auto 5px;
+    font-size: 14px;
+    font-family: Roboto, 'Courier New', Consolas, Inconsolata, Courier, monospace;
+  }
+
+  code {
+    display: inline;
+    border-radius: 2px;
+    white-space: pre-wrap;
+  }
+
+  pre {
+    display: block !important;
+    font-size: 15px;
+    line-height: 1.4em;
+  }
+
+  pre code {
+    display: block !important;
+    overflow: auto;
+    padding: 1px 1px;
+    border-radius: 3px;
+    white-space: pre;
+  }
+
+  strong, b{
+    color: #BF360C;
+  }
+
+  em, i {
+    color: #009688;
+  }
+
+  hr {
+    margin: 1.5em auto;
+    border: 1px solid #BF360C;
+  }
+
+  p {
+    margin: 1.5em 5px !important;
+  }
+
+  table, pre, dl, blockquote, q, ul, ol {
+    margin: 10px 5px;
+  }
+
+  ul, ol {
+    padding-left: 15px;
+  }
+
+  li {
+    margin: 10px;
+  }
+
+  li p {
+    margin: 10px 0 !important;
+  }
+
+  ul ul, ul ol, ol ul, ol ol {
+    margin: 0;
+    padding-left: 10px;
+  }
+
+  ul {
+    list-style-type: circle;
+  }
+
+  dl {
+    padding: 0;
+  }
+
+  dl dt {
+    font-weight: bold;
+    font-style: italic;
+    font-size: 1em;
+  }
+
+  dl dd {
+    margin: 0 0 10px;
+    padding: 0 10px;
+  }
+
+  blockquote, q {
+    margin-left: 1em;
+    padding: 0 10px;
+    border-left: 2px solid #009688;
+    color: #777;
+    quotes: none;
+  }
+
+  blockquote::before, blockquote::after, q::before, q::after {
+    content: none;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    margin: 20px 0 10px;
+    margin: 1.5em 5px !important;
+    padding: 0;
+    padding: 0.5em 1em !important;
+    color: #009688 !important;
+    text-align: left !important;
+    font-style: bold !important;
+  }
+
+  h1 {
+    border-bottom: 1px solid #ddd !important;
+    font-size: 24px !important;
+  }
+
+  h2 {
+    border-bottom: 1px solid #eee !important;
+    font-size: 20px !important;
+  }
+
+  h3 {
+    font-size: 18px;
+  }
+
+  h4 {
+    font-size: 16px;
+  }
+
+
+  table {
+    margin: 0 auto;
+    padding: 0;
+    border: 0;
+    border-spacing: 0;
+    border-collapse: collapse;
+    font: inherit;
+    font-size: 1em;
+  }
+
+  tbody {
+    margin: 0;
+    padding: 0;
+    border: 0;
+  }
+
+  table tr {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    border-top: 1px solid #CCC;
+    background-color: white;
+  }
+
+  table tr:nth-child(2n) {
+    background-color: #F8F8F8;
+  }
+
+  table tr th, table tr td {
+    margin: 0;
+    padding: 5px 10px;
+    border: 1px solid #CCC;
+    font-size: 16px;
+  }
+
+  table tr th {
+    border: 1px solid #009688;
+    background-color: #009688;
+    color: #eee;
+    font-weight: bold;
+  }
+}

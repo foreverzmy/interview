@@ -5,7 +5,3 @@ export interface ITopic {
   updatedAt: number;
 }
 
-export interface ITopics {
-  totalCount: number;
-  nodes: ITopic[];
-}
