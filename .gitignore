@@ -5,3 +5,7 @@ default.etcd/
 
 .cache
 
+graphql/graphql
+question/question
+answer/answer
+
