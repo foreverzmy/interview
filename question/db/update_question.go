@@ -1,14 +1,18 @@
 package db
 
 import (
+	"github.com/golang/glog"
 	"github.com/piex/interview/protorepo/question"
 )
 
 // UpdateQuestion 更新问题
-func UpdateQuestion(qs *question.Question) (err error) {
-	orm, err := qs.ToORM(nil)
+func UpdateQuestion(qu *question.QuestionORM) error {
 
-	err = DB.Table("question").Save(orm).Error
+	err := DB.Table("question").Save(qu).Error
 
-	return
+	if err != nil {
+		glog.Error(err)
+	}
+
+	return err
 }

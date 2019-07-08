@@ -13,7 +13,7 @@ const Main: FC<RouteComponentProps<any>> = ({ history }) => {
   }, [keyword])
 
   return (
-    <main className="main-page">
+    <main className="main-page container">
       <section className="banner">
         面试题
       </section>

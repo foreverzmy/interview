@@ -1,5 +1,16 @@
 .answer-page {
-  width: 100%;
+  margin: 0 auto;
+  min-width: 600px;
+  width: 80vw;
   height: auto;
-  
+
+  .editor {
+    min-height: 500px;
+  }
+
+  .actions {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+  }
 }

@@ -198,12 +198,12 @@ var mutationUpdateAnswer = graphql.Field{
 		_, err := ansClient.UpdateAnswer(context.Background(), &ans)
 
 		res := Success{
-			success: true,
+			Success: true,
 		}
 
 		if err != nil {
 			glog.Error(err)
-			res.success = false
+			res.Success = false
 		}
 		return res, err
 	},

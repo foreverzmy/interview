@@ -178,7 +178,7 @@ var queryQuestionListField = graphql.Field{
 }
 
 var mutationCreateQuestion = graphql.Field{
-	Description: "Create a new question",
+	Description: "Update a question",
 	Type:        questionFieldType,
 	Args: graphql.FieldConfigArgument{
 		"title": &graphql.ArgumentConfig{
@@ -215,6 +215,61 @@ var mutationCreateQuestion = graphql.Field{
 
 		if err != nil {
 			glog.Error(err)
+		}
+
+		return res, err
+	},
+}
+
+var mutationUpdateQuestion = graphql.Field{
+	Description: "Create a new question",
+	Type:        successFieldType,
+	Args: graphql.FieldConfigArgument{
+		"id": &graphql.ArgumentConfig{
+			Description: "The id of the question.",
+			Type:        graphql.NewNonNull(graphql.Int),
+		},
+		"title": &graphql.ArgumentConfig{
+			Description: "The title of question.",
+			Type:        graphql.String,
+		},
+		"summary": &graphql.ArgumentConfig{
+			Description: "The summary of question.",
+			Type:        graphql.String,
+		},
+		"content": &graphql.ArgumentConfig{
+			Description: "The content of question.",
+			Type:        graphql.String,
+		},
+		"difficulty": &graphql.ArgumentConfig{
+			Description: "The difficulty of question.",
+			Type:        graphql.Int,
+		},
+	},
+	Resolve: func(p graphql.ResolveParams) (interface{}, error) {
+		id := int64(p.Args["id"].(int))
+		title := p.Args["title"].(string)
+		content := p.Args["content"].(string)
+		summary := p.Args["summary"].(string)
+		difficulty := int32(p.Args["difficulty"].(int))
+
+		qs := question.Question{
+			Id:         id,
+			Title:      title,
+			Summary:    summary,
+			Content:    content,
+			Difficulty: difficulty,
+		}
+
+		_, err := qsClient.UpdateQuestion(context.Background(), &qs)
+
+		res := Success{
+			Success: true,
+		}
+
+		if err != nil {
+			glog.Error(err)
+			res.Success = false
 		}
 
 		return res, err

@@ -65,7 +65,7 @@ const QuestionPage: FC<RouteComponentProps> = ({ match }) => {
   }, [])
 
   return (
-    <main className="question-page">
+    <main className="question-page container">
       <h1>{question.title}</h1>
       {question.content && <Markdown text={question.content} />}
       <article>

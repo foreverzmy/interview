@@ -9,7 +9,7 @@ import (
 func UpdateAnswer(ans *answer.AnswerORM) error {
 	var oldAns answer.AnswerORM
 
-	err := DB.Table("answer").Find(&oldAns).Error
+	err := DB.Table("answer").Where("id = ?", ans.Id).Find(&oldAns).Error
 
 	ans.QuId = oldAns.QuId
 

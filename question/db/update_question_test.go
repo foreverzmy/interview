@@ -7,7 +7,7 @@ import (
 )
 
 func TestUpdateQuestion(t *testing.T) {
-	qs := question.Question{
+	qs := question.QuestionORM{
 		Id:         1,
 		Title:      "语义化标签",
 		Summary:    "什么是语义化标签，有什么作用，有哪些语义化标签？",

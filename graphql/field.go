@@ -15,5 +15,5 @@ var successFieldType = graphql.NewObject(graphql.ObjectConfig{
 
 // Success 成果
 type Success struct {
-	success bool
+	Success bool
 }

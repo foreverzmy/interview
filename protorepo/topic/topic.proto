@@ -8,8 +8,6 @@ import public "github.com/piex/interview/protorepo/question/question.proto";
 package interview.topic;
 option go_package = "topic";
 
-message Empty {}
-
 message Topic {
   option (gorm.opts) = {
     ormable: true,
@@ -72,7 +70,7 @@ service TopicService {
   rpc CreateTopic(Topic) returns (CreateTopicResponse) {}
  
   // 查找全部 topic
-  rpc GetTopicList(Empty) returns (TopicList) {}
+  rpc GetTopicList(interview.question.Empty) returns (TopicList) {}
 
   rpc GetTopic(GetTopicRequest) returns (Topic) {}
   // 查询 qu 的 topic
@@ -82,5 +80,5 @@ service TopicService {
   rpc GetQusByTopic(GetQusByTopicRequest) returns (interview.question.QuestionList) {}
 
   // qu 添加 topic
-  rpc AddTopicsToQuestion(AddTopicsToQuestionRequest) returns (Empty) {}
+  rpc AddTopicsToQuestion(AddTopicsToQuestionRequest) returns (interview.question.Empty) {}
 }

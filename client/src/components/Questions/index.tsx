@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import './style.scss';
 
 import { IQuestion, IList } from '../../model';
+import { difficultyOptions } from '../../constant';
 
 export interface IQuestionsProps {
   data: IList<IQuestion>;
@@ -29,7 +30,7 @@ const Questions: FC<IQuestionsProps> = ({ data }) => {
                 <tr key={question.id}>
                   {/* <td>{question.id}</td> */}
                   <td><Link to={`/question/${question.id}`}>{question.title}</Link></td>
-                  <td>{question.difficulty}</td>
+                  <td>{difficultyOptions[question.difficulty - 1].text}</td>
                 </tr>
               )
             })

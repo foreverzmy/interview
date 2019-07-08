@@ -54,7 +54,7 @@ const SearchPage: FC<RouteComponentProps> = ({ location, history }) => {
   }, [keyword])
 
   return (
-    <main className="search-page">
+    <main className="search-page container">
       <Search
         placeholder="回车搜索"
         value={keyword}

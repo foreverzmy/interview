@@ -8,7 +8,6 @@ It is generated from these files:
 	topic.proto
 
 It has these top-level messages:
-	Empty
 	Topic
 	QuTopic
 	TopicList

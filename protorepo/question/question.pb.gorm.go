@@ -8,11 +8,11 @@ It is generated from these files:
 	question.proto
 
 It has these top-level messages:
+	Empty
 	Question
 	GetQuestionListRequest
 	QuestionList
 	CreateQuestionResponse
-	UpdateQuestionResponse
 */
 package question
 

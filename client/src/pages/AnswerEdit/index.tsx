@@ -71,13 +71,13 @@ const AnswerEditPage: FC<RouteComponentProps> = ({ match, history, location }) =
               success
             }
         }`,
-        variables: { id, content }
+        variables: { id: ansId, content }
       })
     })
       .then(() => {
         history.push(`/question/${id}`)
       }).catch(() => { })
-  }, [content]);
+  }, [id, content]);
 
   const create = useCallback(() => {
     fetch('/graphql', {
@@ -99,7 +99,7 @@ const AnswerEditPage: FC<RouteComponentProps> = ({ match, history, location }) =
       .then(() => {
         history.push(`/question/${id}`)
       }).catch(() => { })
-  }, [content]);
+  }, [id, content]);
 
   const handleSubmit = useCallback(() => {
     if (isCreate) {
@@ -107,16 +107,18 @@ const AnswerEditPage: FC<RouteComponentProps> = ({ match, history, location }) =
     } else {
       update();
     }
-  }, [content])
+  }, [isCreate, create, update])
 
   return (
-    <main className="answer-page">
+    <main className="answer-page container">
       <h1>{question.title}</h1>
       {question.content && <Markdown text={question.content} />}
-      <button onClick={handleSubmit} >保存</button>
       <article className="editor-wrap">
         <Editor value={content} onChange={setContent} />
       </article>
+      <section className="actions">
+        <button className="submit-button" onClick={handleSubmit} >保存</button>
+      </section>
     </main>
   )
 }

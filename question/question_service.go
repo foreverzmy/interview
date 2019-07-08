@@ -24,12 +24,15 @@ func (s *QuestionService) CreateQuestion(ctx context.Context, qs *question.Quest
 }
 
 // UpdateQuestion 更新问题
-func (s *QuestionService) UpdateQuestion(ctx context.Context, qs *question.Question) (res *question.UpdateQuestionResponse, err error) {
-	err = db.UpdateQuestion(qs)
+func (s *QuestionService) UpdateQuestion(ctx context.Context, qu *question.Question) (*question.Empty, error) {
 
-	res.Success = true
+	quORM, err := qu.ToORM(ctx)
 
-	return
+	err = db.UpdateQuestion(&quORM)
+
+	res := question.Empty{}
+
+	return &res, err
 }
 
 // GetQuestionDetail 查看详情

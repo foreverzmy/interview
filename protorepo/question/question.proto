@@ -6,6 +6,8 @@ import public "github.com/infobloxopen/protoc-gen-gorm/options/gorm.proto";
 package interview.question;
 option go_package = "question";
 
+message Empty {}
+
 message Question {
   option (gorm.opts) = {
     ormable: true,
@@ -36,15 +38,11 @@ message CreateQuestionResponse {
   int64 id                            = 1;
 }
 
-message UpdateQuestionResponse {
-  bool success                        = 1;
-}
-
 service QuestionServive {
   // 创建
   rpc CreateQuestion(Question) returns (CreateQuestionResponse) {}
   // 更新
-  rpc UpdateQuestion(Question) returns (UpdateQuestionResponse) {}
+  rpc UpdateQuestion(Question) returns (Empty) {}
   // 查看详情
   rpc GetQuestionDetail(Question) returns (Question) {}
   // 查看列表

@@ -1,4 +1,29 @@
 body {
+  margin: 0;
   font-family: "Helvetica Neue", Helvetica, Arial, "PingFang SC", "Hiragino Sans GB", "Heiti SC", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
 }
 
+.container {
+  margin-top: 80px !important;
+}
+
+.submit-button {
+  padding: 0 15px;
+  height: 32px;
+  outline: none;
+  border: 1px solid transparent;
+  border-color: #1890ff;
+  border-radius: 4px;
+  background-color: #1890ff;
+  box-shadow: 0 2px 0 rgba(0,0,0,0.045);
+  color: #fff;
+  text-align: center;
+  text-shadow: 0 -1px 0 rgba(0,0,0,0.12);
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.499;
+  cursor: pointer;
+  transition: all .3s cubic-bezier(.645, .045, .355, 1);
+
+  touch-action: manipulation;
+}

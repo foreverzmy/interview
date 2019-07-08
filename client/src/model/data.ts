@@ -15,5 +15,9 @@ export interface IGraphqlData {
     topics: IList<ITopic>,
     answer: IAnswer,
     answers: IList<IAnswer>,
+    createQuestion: { id: number },
+    updateQuestion: { success: boolean },
+    createAnswer: { id: number },
+    updateAnswer: { success: boolean },
   }
 }
