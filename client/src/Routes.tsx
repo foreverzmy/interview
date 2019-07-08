@@ -12,6 +12,7 @@ const Routes: FC<{}> = () => (
     <Switch>
       <Route path="/main" component={Main} />
       <Route path="/questions" component={SearchPage} />
+      <Route path="/question/:id/answer/create" component={AnswerEdit} />
       <Route path="/question/:id/answer/:ansId" component={AnswerEdit} />
       <Route path="/question/:id" component={Question} />
       <Route path="/question/edit/:id" component={QuestionEdit} />
