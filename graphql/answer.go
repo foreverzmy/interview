@@ -64,6 +64,32 @@ var ansListFieldType = graphql.NewObject(graphql.ObjectConfig{
 	},
 })
 
+var queryAnswerField = graphql.Field{
+	Description: "get answer detail",
+	Type:        ansFieldType,
+	Args: graphql.FieldConfigArgument{
+		"id": &graphql.ArgumentConfig{
+			Description: "question id",
+			Type:        graphql.NewNonNull(graphql.Int),
+		},
+	},
+	Resolve: func(p graphql.ResolveParams) (interface{}, error) {
+		id := int64(p.Args["id"].(int))
+
+		req := answer.GetAnswerRequest{
+			Id: id,
+		}
+
+		ans, err := ansClient.GetAnswer(context.Background(), &req)
+
+		if err != nil {
+			glog.Error(err)
+		}
+
+		return ans, err
+	},
+}
+
 var queryAnswerListField = graphql.Field{
 	Description: "",
 	Type:        ansListFieldType,

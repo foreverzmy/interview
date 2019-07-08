@@ -185,6 +185,10 @@ var mutationCreateQuestion = graphql.Field{
 			Description: "The title of question.",
 			Type:        graphql.String,
 		},
+		"summary": &graphql.ArgumentConfig{
+			Description: "The summary of question.",
+			Type:        graphql.String,
+		},
 		"content": &graphql.ArgumentConfig{
 			Description: "The content of question.",
 			Type:        graphql.String,
@@ -197,10 +201,12 @@ var mutationCreateQuestion = graphql.Field{
 	Resolve: func(p graphql.ResolveParams) (interface{}, error) {
 		title := p.Args["title"].(string)
 		content := p.Args["content"].(string)
+		summary := p.Args["summary"].(string)
 		difficulty := int32(p.Args["difficulty"].(int))
 
 		qs := question.Question{
 			Title:      title,
+			Summary:    summary,
 			Content:    content,
 			Difficulty: difficulty,
 		}

@@ -12,6 +12,7 @@ It has these top-level messages:
 	Answer
 	AnswerList
 	CreateAnswerResponse
+	GetAnswerRequest
 	GetAnswerListRequest
 */
 package answer

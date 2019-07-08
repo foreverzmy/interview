@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 
+	"github.com/golang/glog"
 	"github.com/piex/interview/answer/db"
 	"github.com/piex/interview/protorepo/answer"
 )
@@ -31,6 +32,20 @@ func (s *AnswerService) UpdateAnswer(ctx context.Context, ans *answer.Answer) (*
 	res := answer.Empty{}
 
 	return &res, err
+}
+
+// GetAnswer 查询详情
+func (s *AnswerService) GetAnswer(ctx context.Context, req *answer.GetAnswerRequest) (*answer.Answer, error) {
+	ansORM, err := db.GetAnswer(req.Id)
+
+	if err != nil {
+		glog.Error(err)
+	}
+
+	ans, err := ansORM.ToPB(ctx)
+
+	return &ans, err
+
 }
 
 // GetAnswerList 获取列表
