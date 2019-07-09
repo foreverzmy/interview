@@ -65,9 +65,11 @@ const QuestionPage: FC<RouteComponentProps> = ({ match }) => {
   }, [])
 
   return (
-    <main className="question-page container">
-      <h1>{question.title}</h1>
+    <main className="answer-page container">
+      <h1 className="title">题目</h1>
+      <h2>{question.title}</h2>
       {question.content && <Markdown text={question.content} />}
+      <h1 className="title answer">答案</h1>
       <article>
         {answers.nodes.map(answer => {
           return (

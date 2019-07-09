@@ -5,6 +5,8 @@ import './style.scss';
 import { IQuestion, IList } from '../../model';
 import { difficultyOptions } from '../../constant';
 
+import Pagination from '../Pagination'
+
 export interface IQuestionsProps {
   data: IList<IQuestion>;
 }
@@ -37,7 +39,12 @@ const Questions: FC<IQuestionsProps> = ({ data }) => {
           }
         </tbody>
       </table>
-      <p>共{totalCount}个题目</p>
+      <Pagination
+        current={1}
+        size={20}
+        total={totalCount}
+        onChange={(current) => console.log(current)}
+      />
     </section>
   )
 }

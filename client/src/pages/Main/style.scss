@@ -1,4 +1,7 @@
 .main-page {
+  margin: 0 auto;
+  width: 980px;
+
   user-select: none;
   
   .banner {
@@ -13,6 +16,7 @@
 
   .search {
     margin: 0 auto;
+    width: 600px;
   }
 
   .topics {
@@ -20,6 +24,5 @@
     flex-wrap: wrap;
     justify-content: center;
     margin: 100px auto;
-    width: 600px;
   }
 }

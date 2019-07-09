@@ -1,5 +1,16 @@
-.question-page {
+.answer-page {
   margin: 0 auto;
   min-width: 600px;
+  max-width: 980px;
   width: 50vw;
+
+  .title {
+    margin: 20px auto;
+    color: #009688;
+    text-align: center;
+
+    &.answer {
+      margin-top: 50px;
+    }
+  }
 }

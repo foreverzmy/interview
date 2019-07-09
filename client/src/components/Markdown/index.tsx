@@ -15,7 +15,7 @@ const Markdown: FC<IMarkdownProps> = ({ text }) => {
   }, [text])
 
   return (
-    <div className="markdown-wrapper " dangerouslySetInnerHTML={rawMarkup} />
+    <div className="markdown-wrapper" dangerouslySetInnerHTML={rawMarkup} />
   )
 }
 
