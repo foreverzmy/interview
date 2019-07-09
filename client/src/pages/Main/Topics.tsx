@@ -44,7 +44,7 @@ const Topics: FC<{}> = () => {
   return (
     <article className="topics">
       {topics.map(topic => {
-        return (<Link key={topic.id} to="/topic"><Tag >{topic.slug}</Tag></Link>)
+        return (<Link key={topic.id} to={`topic/${topic.id}`}><Tag >{topic.slug}</Tag></Link>)
       })}
     </article>
   )

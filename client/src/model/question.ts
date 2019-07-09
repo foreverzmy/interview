@@ -1,3 +1,6 @@
+import { IList } from './data';
+import { ITopic } from './topic';
+
 export interface IQuestion {
   id: number,
   title: string,
@@ -6,4 +9,5 @@ export interface IQuestion {
   difficulty: 1 | 2 | 3,
   createdAt: number,
   updatedAt: number;
+  topics: IList<ITopic>;
 }

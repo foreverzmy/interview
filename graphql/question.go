@@ -197,6 +197,10 @@ var mutationCreateQuestion = graphql.Field{
 			Description: "The difficulty of question.",
 			Type:        graphql.Int,
 		},
+		"topics": &graphql.ArgumentConfig{
+			Description: "id of topics",
+			Type:        graphql.NewList(graphql.Int),
+		},
 	},
 	Resolve: func(p graphql.ResolveParams) (interface{}, error) {
 		title := p.Args["title"].(string)
@@ -212,6 +216,25 @@ var mutationCreateQuestion = graphql.Field{
 		}
 
 		res, err := qsClient.CreateQuestion(context.Background(), &qs)
+
+		if err != nil {
+			glog.Error(err)
+			return nil, err
+		}
+
+		tocs, tocOK := p.Args["topics"].([]interface{})
+
+		if tocOK {
+			topics := make([]int64, len(tocs))
+			for i := range tocs {
+				topics[i] = int64(tocs[i].(int))
+			}
+
+			_, err = topicClient.AddTopicsToQuestion(context.Background(), &topic.AddTopicsToQuestionRequest{
+				QuId:     res.Id,
+				TopicIds: topics,
+			})
+		}
 
 		if err != nil {
 			glog.Error(err)
@@ -245,6 +268,10 @@ var mutationUpdateQuestion = graphql.Field{
 			Description: "The difficulty of question.",
 			Type:        graphql.Int,
 		},
+		"topics": &graphql.ArgumentConfig{
+			Description: "id of topics",
+			Type:        graphql.NewList(graphql.Int),
+		},
 	},
 	Resolve: func(p graphql.ResolveParams) (interface{}, error) {
 		id := int64(p.Args["id"].(int))
@@ -262,6 +289,20 @@ var mutationUpdateQuestion = graphql.Field{
 		}
 
 		_, err := qsClient.UpdateQuestion(context.Background(), &qs)
+
+		tocs, tocOK := p.Args["topics"].([]interface{})
+
+		if tocOK {
+			topics := make([]int64, len(tocs))
+			for i := range tocs {
+				topics[i] = int64(tocs[i].(int))
+			}
+
+			_, err = topicClient.AddTopicsToQuestion(context.Background(), &topic.AddTopicsToQuestionRequest{
+				QuId:     id,
+				TopicIds: topics,
+			})
+		}
 
 		res := Success{
 			Success: true,

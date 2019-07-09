@@ -1,8 +1,15 @@
-.answer-page {
+.answer-edit-page {
   margin: 0 auto;
   min-width: 980px;
   width: 80vw;
   height: auto;
+
+  .question {
+    margin: 0 auto;
+    margin-bottom: 100px;
+    min-width: 980px;
+    max-width: 1200px;
+  }
 
   .editor {
     min-height: 500px;

@@ -15,7 +15,7 @@ const Main: FC<RouteComponentProps<any>> = ({ history }) => {
   return (
     <main className="main-page container">
       <section className="banner">
-        面试题
+        面客
       </section>
       <Search
         placeholder="回车搜索"

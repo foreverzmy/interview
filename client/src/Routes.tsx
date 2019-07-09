@@ -6,7 +6,8 @@ import Main from './pages/Main';
 import SearchPage from './pages/Search';
 import Question from './pages/Question';
 import QuestionEdit from './pages/QuestionEdit';
-import AnswerEdit from './pages/AnswerEdit'
+import AnswerEdit from './pages/AnswerEdit';
+import Topic from './pages/Topic';
 
 const Routes: FC<{}> = () => (
   <HashRouter>
@@ -19,6 +20,7 @@ const Routes: FC<{}> = () => (
       <Route path="/question/create" component={QuestionEdit} />
       <Route path="/question/edit/:id" component={QuestionEdit} />
       <Route path="/question/:id" component={Question} />
+      <Route path="/topic/:id" component={Topic} />
       <Redirect from="/" to="/main" />
     </Switch>
   </HashRouter>

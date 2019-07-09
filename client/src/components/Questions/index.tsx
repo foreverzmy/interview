@@ -5,15 +5,12 @@ import './style.scss';
 import { IQuestion, IList } from '../../model';
 import { difficultyOptions } from '../../constant';
 
-import Pagination from '../Pagination'
-
 export interface IQuestionsProps {
   data: IList<IQuestion>;
 }
 
 const Questions: FC<IQuestionsProps> = ({ data }) => {
-
-  const { totalCount, nodes } = data;
+  const { nodes } = data;
 
   return (
     <section className="questions">
@@ -31,7 +28,14 @@ const Questions: FC<IQuestionsProps> = ({ data }) => {
               return (
                 <tr key={question.id}>
                   {/* <td>{question.id}</td> */}
-                  <td><Link to={`/question/${question.id}`}>{question.title}</Link></td>
+                  <td className={question.summary && 'has-summary'}>
+                    <Link to={`/question/${question.id}`}>
+                      {question.title}
+                      <br />
+                      {question.summary && (
+                        <span className="summary">{question.summary}</span>
+                      )}
+                    </Link></td>
                   <td>{difficultyOptions[question.difficulty - 1].text}</td>
                 </tr>
               )
@@ -39,12 +43,7 @@ const Questions: FC<IQuestionsProps> = ({ data }) => {
           }
         </tbody>
       </table>
-      <Pagination
-        current={1}
-        size={20}
-        total={totalCount}
-        onChange={(current) => console.log(current)}
-      />
+
     </section>
   )
 }

@@ -36,7 +36,7 @@ const Coder: FC<ICodeMirrorProps> = ({ value, onChange }) => {
       })
     }
 
-    if (value !== '' && !isSetValue) {
+    if (!isSetValue && value !== editor.current.getValue()) {
       editor.current.setValue(value);
       setIsSetValue(true);
     }

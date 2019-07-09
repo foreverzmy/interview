@@ -110,9 +110,11 @@ const AnswerEditPage: FC<RouteComponentProps> = ({ match, history, location }) =
   }, [isCreate, create, update])
 
   return (
-    <main className="answer-page container">
-      <h1>{question.title}</h1>
-      {question.content && <Markdown text={question.content} />}
+    <main className="answer-edit-page container">
+      <section className="question">
+        <h1>{question.title}</h1>
+        {question.content && <Markdown text={question.content} />}
+      </section>
       <article className="editor-wrap">
         <Editor value={content} onChange={setContent} />
       </article>

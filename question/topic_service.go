@@ -70,5 +70,7 @@ func (s *TopicService) GetQusByTopic(ctx context.Context, req *topic.GetQusByTop
 
 // AddTopicsToQuestion qu 添加 topic
 func (s *TopicService) AddTopicsToQuestion(ctx context.Context, req *topic.AddTopicsToQuestionRequest) (*topic.Empty, error) {
-	return nil, nil
+	err := db.QuAddTopic(req.QuId, req.TopicIds)
+
+	return &topic.Empty{}, err
 }

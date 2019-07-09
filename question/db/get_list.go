@@ -8,6 +8,7 @@ import (
 func GetQuestionList(page int32, size int32, keyword string) (questions []question.QuestionORM, total int64, err error) {
 	err = DB.Table("question").
 		Where("title LIKE ?", "%"+keyword+"%").
+		Or("summary LIKE ?", "%"+keyword+"%").
 		Count(&total).
 		Error
 
@@ -17,6 +18,7 @@ func GetQuestionList(page int32, size int32, keyword string) (questions []questi
 
 	err = DB.Table("question").
 		Where("title LIKE ?", "%"+keyword+"%").
+		Or("summary LIKE ?", "%"+keyword+"%").
 		Limit(size).Offset((page - 1) * size).
 		Find(&questions).
 		Error

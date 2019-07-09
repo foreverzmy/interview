@@ -18,7 +18,7 @@ func GetQusByTopic(page int32, size int32, topicIDs int64) (quList question.Ques
 		return
 	}
 
-	err = DB.Table("question").Joins("left join qu_topic on qu_topic.topic_id = question.id").Where("qu_topic.topic_id = ?", topicIDs).Limit(size).Offset((page - 1) * size).Find(&qusORM).Error
+	err = DB.Table("question").Joins("left join qu_topic on qu_topic.qu_id = question.id").Where("qu_topic.topic_id = ?", topicIDs).Limit(size).Offset((page - 1) * size).Find(&qusORM).Error
 
 	for _, quORM := range qusORM {
 		var pb question.Question

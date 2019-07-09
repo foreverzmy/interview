@@ -5,11 +5,13 @@ import './style.scss';
 import { IGraphqlData, IList, IQuestion } from '../../model';
 import Search from '../../components/Search';
 import Questions from '../../components/Questions';
+import Pagination from '../../components/Pagination';
 
 const SearchPage: FC<RouteComponentProps> = ({ location, history }) => {
   const params = new URLSearchParams(location.search);
   const [keyword, setKeyword] = useState(params.get('keyword') || '');
-  const [questions, setQuestions] = useState<IList<IQuestion>>({ totalCount: 0, nodes: [] })
+  const [current, setCurrent] = useState(1);
+  const [questions, setQuestions] = useState<IList<IQuestion>>({ totalCount: 0, nodes: [] });
 
   useEffect(() => {
     fetchQuestions();
@@ -30,7 +32,7 @@ const SearchPage: FC<RouteComponentProps> = ({ location, history }) => {
       body: JSON.stringify({
         query: `
           {
-            questions(page: 1, size: 10, keyword: "${keyword}")  {
+            questions(page: ${current}, size: 20, keyword: "${keyword}")  {
               totalCount
               nodes{
                 id
@@ -62,6 +64,12 @@ const SearchPage: FC<RouteComponentProps> = ({ location, history }) => {
         onEnter={fetchQuestions}
       />
       <Questions data={questions} />
+      <Pagination
+        current={current}
+        size={20}
+        total={questions.totalCount}
+        onChange={(current) => setCurrent(current)}
+      />
     </main>
   )
 }

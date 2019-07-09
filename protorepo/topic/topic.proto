@@ -62,7 +62,7 @@ message GetQusByTopicResponse {
 
 message AddTopicsToQuestionRequest {
   int64 qu_id                         = 1;
-  repeated int64 topic_id             = 2;
+  repeated int64 topic_ids            = 2;
 }
 
 service TopicService {
