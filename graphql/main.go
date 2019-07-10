@@ -86,5 +86,5 @@ func main() {
 	glog.Info("Server Start.")
 
 	r := NewRouter()
-	http.ListenAndServe(":8099", r)
+	http.ListenAndServe(":8100", r)
 }

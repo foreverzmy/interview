@@ -32,7 +32,7 @@ func initGrpc() {
 	flag.Parse()
 	serv := flag.String("service", "question_service", "service name")
 	host := flag.String("host", "localhost", "listening host")
-	port := flag.String("port", "50001", "listening port")
+	port := flag.String("port", "50005", "listening port")
 	reg := flag.String("reg", "http://localhost:2379", "register etcd address")
 	lis, err = net.Listen("tcp", net.JoinHostPort(*host, *port))
 	if err != nil {
