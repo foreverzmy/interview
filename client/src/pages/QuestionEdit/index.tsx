@@ -2,14 +2,16 @@ import React, { FC, useCallback, useEffect, useState, ChangeEvent } from 'react'
 import { withRouter, RouteComponentProps } from 'react-router';
 import './style.scss';
 
-import { IGraphqlData } from '../../model';
+import { IGraphqlData, IList, ITopic } from '../../model';
 import { difficultyOptions } from '../../constant';
 import Editor from '../../components/Editor';
 import Search from '../../components/Search';
+import Tag from '../../components/Tag';
 
 const QuestionEditPage: FC<RouteComponentProps> = ({ match, location, history }) => {
   const { id } = match.params as { id: number };
 
+  const [topics, setTopics] = useState<ITopic[]>([]);
   const [title, setTitle] = useState('');
   const [difficulty, setDifficulty] = useState<1 | 2 | 3>(1);
   const [summary, setSummary] = useState('');
@@ -52,18 +54,28 @@ const QuestionEditPage: FC<RouteComponentProps> = ({ match, location, history })
                 updatedAt
               }
             }
+            topics {
+              totalCount
+              nodes {
+                id
+                slug
+                createdAt
+                updatedAt
+              }
+            }
           }
         `
       })
     })
       .then<IGraphqlData>((res) => res.json())
       .then(({ data }) => {
-        const { question } = data;
+        const { question, topics } = data;
         const { title, difficulty, summary, content } = question;
         setTitle(title);
         setDifficulty(difficulty);
         setSummary(summary);
         setContent(content);
+        setTopics(topics.nodes || []);
       })
   }, []);
 
@@ -92,7 +104,8 @@ const QuestionEditPage: FC<RouteComponentProps> = ({ match, location, history })
       .then(({ data }) => {
         const { createQuestion } = data;
         history.push(`/question/${createQuestion.id}`)
-      }).catch(() => { })
+      }).catch(() => { });
+
   }, [title, difficulty, summary, content]);
 
   const update = useCallback(() => {
@@ -125,6 +138,7 @@ const QuestionEditPage: FC<RouteComponentProps> = ({ match, location, history })
           history.push(`/question/${id}`)
         }
       }).catch(() => { })
+
   }, [title, difficulty, summary, content]);
 
   const handleSave = useCallback(() => {
@@ -159,6 +173,12 @@ const QuestionEditPage: FC<RouteComponentProps> = ({ match, location, history })
             {option.text}
           </label>
         ))}
+      </section>
+      <section>
+        <label htmlFor="title">标签：</label>
+        {topics.map(topic => {
+          return <Tag key={topic.id}>{topic.slug}</Tag>
+        })}
       </section>
       <section>
         <label htmlFor="title">简介：</label>
