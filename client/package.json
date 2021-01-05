@@ -4,7 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
-    "axios": "^0.19.0",
+    "axios": "^0.21.1",
     "codemirror": "^5.48.0",
     "dompurify": "^1.0.11",
     "marked": "^0.7.0",
